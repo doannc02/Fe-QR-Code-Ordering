@@ -12,6 +12,7 @@ import SupervisedUserCircleIcon from '@mui/icons-material/SupervisedUserCircle'
 import { ReactNode } from 'react'
 import AnalyticsIcon from '@mui/icons-material/Analytics'
 import TextSnippetIcon from '@mui/icons-material/TextSnippet'
+import { Table } from 'lucide-react'
 export interface MenuPathProps {
   name: string
   path: string
@@ -30,15 +31,7 @@ export const TRANSLATE = {
 export const MENU_URL = {
   CONFIG: '/config',
   ORDER_ADMIN: '/orderAdmin',
-  COURSE: '/course',
-  DEPARTMENT: '/department',
-  DETAIL_EXAM: '/detailExam',
-  PROPOSAL: '/proposal',
-  APPROVE: '/approve',
-  EXAM_SET: '/examSet',
-  MAJOR: '/major',
-  ACADEMIC: '/academicYear',
-  TRACKING: '/trackingApprove',
+  TABLE: '/table',
 }
 
 export const listMenuForAdminRoutes: MenuPathProps[] = [
@@ -48,37 +41,15 @@ export const listMenuForAdminRoutes: MenuPathProps[] = [
     icon: <Dashboard />,
   },
   {
-    name: 'Quản Lý Chung',
+    name: 'Quản Lý Đơn Đặt',
     path: MENU_URL.ORDER_ADMIN,
     icon: <ManageAccountsIcon />,
   },
 
   {
-    name: 'Quản lý Tài Liệu',
-    path: 'M',
-    icon: <ReceiptLongIcon />,
-    children: [
-      {
-        name: 'QL Đề Chi Tiết',
-        path: MENU_URL.DETAIL_EXAM,
-        icon: <FilePresentIcon />,
-      },
-      {
-        name: 'QL Bộ Đề',
-        path: '/examSet',
-        icon: <AutoStoriesIcon />,
-      },
-      {
-        name: 'QL Kế Hoạch',
-        path: MENU_URL.PROPOSAL,
-        icon: <NoteAltIcon />,
-      },
-    ],
-  },
-  {
-    name: 'Yêu cầu phê duyệt',
-    path: MENU_URL.TRACKING,
-    icon: <AnalyticsIcon />,
+    name: 'Quản Lý Bàn',
+    path: MENU_URL.TABLE,
+    icon: <Table />,
   },
 ]
 
@@ -87,32 +58,5 @@ export const listMenuForUserRoutes: MenuPathProps[] = [
     name: 'Trang Chủ',
     path: '/dashboard',
     icon: <Dashboard />,
-  },
-  {
-    name: 'Quản lý Tài Liệu',
-    path: 'M',
-    icon: <SubjectIcon />,
-    children: [
-      {
-        name: 'QL Đề Chi Tiết',
-        path: MENU_URL.DETAIL_EXAM,
-        icon: <TextSnippetIcon />,
-      },
-      {
-        name: 'QL Bộ Đề',
-        path: '/examSet',
-        icon: <AutoStoriesIcon />,
-      },
-      {
-        name: 'QL Kế Hoạch',
-        path: MENU_URL.PROPOSAL,
-        icon: <NoteAltIcon />,
-      },
-    ],
-  },
-  {
-    name: 'Theo dõi phê duyệt',
-    path: MENU_URL.TRACKING,
-    icon: <AnalyticsIcon />,
   },
 ]

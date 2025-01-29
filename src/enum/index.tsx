@@ -5,13 +5,6 @@ export const stateEnum = {
   rejected: 'Từ chối',
 }
 
-export const stateEnumUser = [
-  { in_progress: 'Đang thực hiện' },
-  { pending_approval: 'Yêu cầu phê duyệt' },
-]
-
-
-
 export const menuStateView = [
   { value: 'in_progress', name: 'Đang thực hiện' },
   { value: 'pending_approval', name: 'Yêu cầu phê duyệt' },

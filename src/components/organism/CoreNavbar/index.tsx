@@ -33,7 +33,7 @@ const CoreNavbar = (props: Props) => {
   }, [tabNumber])
 
   return (
-    <div>
+    <div className=''>
       <div className=' flex items-center h-[40px] w-full'>
         {breadcrumbs.map((item, index) => (
           <div key={index}>

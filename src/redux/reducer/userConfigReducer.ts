@@ -12,6 +12,7 @@ const userConfigSlice = createSlice({
       state.fullname = action.payload.fullname
       state.email = action.payload.email
       state.avatar = action.payload.avatar
+      state.tableId = action.payload.tableId
     },
   },
 })

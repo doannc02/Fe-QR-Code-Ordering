@@ -19,7 +19,6 @@ export const getListFoodItems = async (params: ParamFoodItem): Promise<
 }
 
 export const useQueryGetListFoodItems = (params: ParamFoodItem, options?: any) => {
-    console.log(params, 'logzz')
   return useQuery<PageResponse<TypeFoodItem[]>>(
     ['api/v1/foodItem/list'],
     () => getListFoodItems(params),

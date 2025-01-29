@@ -29,8 +29,8 @@ export const Layout1 = ({ children }: { children: ReactNode }) => {
         },
       }}
     >
-      <Box className='flex flex-col flex-1 h-screen overflow-auto'>
-        <Header/>
+      <Box className='flex flex-col flex-1 h-screen  overflow-auto'>
+        <Header />
 
         <Box className='w-full flex' sx={{ maxHeight: `calc( 100vh - 80px )` }}>
           {/* LeftMenu sẽ chỉ hiển thị trên desktop */}
@@ -39,10 +39,10 @@ export const Layout1 = ({ children }: { children: ReactNode }) => {
           </Box>
 
           <Box
-            className='flex flex-col w-full relative'
+            className='flex flex-col bg-black w-full relative'
             sx={{
               minHeight: isLoading ? 'calc( 100vh - 45px )' : 'auto',
-              height: `calc( 100vh - 45px )`,
+              height: `calc( 95vh - 45px )`,
               overflow: 'auto',
             }}
           >

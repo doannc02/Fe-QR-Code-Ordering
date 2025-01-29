@@ -92,6 +92,7 @@ export type CurrentLogin = {
   fullname?: string | ''
   email?: string | null
   avatar?: string
+  tableId: number
 }
 
 export type OrderStore = {

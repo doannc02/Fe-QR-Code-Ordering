@@ -5,13 +5,19 @@ import { setSignalRConnection } from '@/redux/reducer/signalRConnect'
 import { setCurrentLogin } from '@/redux/reducer/userConfigReducer'
 import { HubConnectionBuilder } from '@microsoft/signalr'
 import getConfig from 'next/config'
+import { useRouter } from 'next/router'
 import { useState } from 'react'
+import { toast } from 'react-toastify'
 const {
   publicRuntimeConfig: { COMMON_URL },
 } = getConfig()
 
 export const useDashboard = () => {
   const dispatch = useAppDispatch()
+
+  const router = useRouter()
+
+  const { TableId } = router.query
 
   const idUser = useAppSelector((state) => state.userData.id)
 
@@ -107,10 +113,13 @@ export const useDashboard = () => {
 
   // Tạo người dùng và lưu vào redux
   const createUser = async (name: string, id: string) => {
+
+    //todo update trạng thái của table đã có người ngồi
     dispatch(
       setCurrentLogin({
         id: id,
         name: name,
+        tableId: Number(TableId),
       })
     )
     return new Promise((resolve) => setTimeout(resolve, 2000))
