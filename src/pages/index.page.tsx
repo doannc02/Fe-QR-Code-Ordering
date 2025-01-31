@@ -1,6 +1,6 @@
 import { BasicLayout } from '@/components/layouts/WrapLayout/BasicLayout'
 import { Meta } from '@/components/meta'
-import Dashboard from '@/components/templates/Dashboard'
+import Dashboard from '@/components/templates/Customer/Dashboard'
 import { HttpResponse } from '@/lib/api'
 import { combineGssp } from '@/lib/next/gssp/combineGssp'
 import { authGssp } from '@/lib/next/gssp/middleware/authGssp'

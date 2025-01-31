@@ -28,7 +28,7 @@ const MenuItemOpen = (props: Props) => {
 
   const groupMenuChecked = useCallback(
     (item: MenuPathProps): boolean => {
-      if (item.isChecked) return router.asPath.startsWith(item.path)
+      if (item.isChecked) return router.asPath === item.path
 
       if (item.children || item.subMenu)
         return [
@@ -36,10 +36,9 @@ const MenuItemOpen = (props: Props) => {
           ...(item.subMenu ? item.subMenu : []),
         ].some(
           (itemMenu) =>
-            router.asPath.startsWith(itemMenu.path) ||
-            groupMenuChecked(itemMenu)
+            router.asPath === itemMenu.path || groupMenuChecked(itemMenu)
         )
-      return router.asPath.startsWith(item.path)
+      return router.asPath === (item.path)
     },
     [router.asPath]
   )

@@ -67,15 +67,14 @@ export const OrderItem = (props: {
         onSubmit={onSubmit}
         className='bg-white rounded-md border-2 border-black flex flex-wrap p-4 w-full'
       >
-        {/* Image Section */}
-        <div className='w-full md:w-1/4 lg:w-full'>
+        <div className='w-[32%] h-[110px] lg:h-full lg:w-full rounded-md overflow-hidden'>
           <Image
             src={imageURL}
             alt='Order Image'
             width={150}
             height={150}
-            layout='intrinsic'
-            className='object-cover rounded-md w-full max-h-[160px]'
+            objectFit='cover'
+            className='rounded-md lg:w-full'
           />
         </div>
 

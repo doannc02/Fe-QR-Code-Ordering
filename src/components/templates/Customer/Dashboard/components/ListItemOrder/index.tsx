@@ -21,11 +21,9 @@ export const ListItemOrder = ({
     )
   }
 
-
-
   return (
-    <Grid container spacing={{ xs: 2, sm: 2, md: 3 }}>
-      <Grid item xs={12}>
+    <Grid container spacing={{ xs: 3, sm: 2, md: 3 }}>
+      <Grid item xs={12} className='pt-2'>
         <Chip
           avatar={<AcUnitIcon />}
           clickable
@@ -59,7 +57,7 @@ export const ListItemOrder = ({
             )
           })
         : items.map((item, index) => (
-            <Grid item xs={12} sm={4} md={4} lg={4} key={item.id}>
+            <Grid item xs={12} sm={4} md={3} lg={3} key={item.id}>
               <OrderItem
                 foodItemId={item.id}
                 imageUrl={item.imageUrl}

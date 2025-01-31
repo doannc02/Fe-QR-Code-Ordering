@@ -10,7 +10,6 @@ import {
 import getConfig from 'next/config'
 import HomePage from './components/Banner'
 import { useDashboard } from './useDashboard'
-import Image from 'next/image'
 
 const {
   publicRuntimeConfig: { COMMON_URL },

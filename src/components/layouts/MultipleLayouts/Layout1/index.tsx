@@ -39,7 +39,7 @@ export const Layout1 = ({ children }: { children: ReactNode }) => {
           </Box>
 
           <Box
-            className='flex flex-col bg-black w-full relative'
+            className='flex flex-col w-full relative'
             sx={{
               minHeight: isLoading ? 'calc( 100vh - 45px )' : 'auto',
               height: `calc( 95vh - 45px )`,

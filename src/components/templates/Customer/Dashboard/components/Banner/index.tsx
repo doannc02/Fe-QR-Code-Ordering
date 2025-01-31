@@ -13,6 +13,7 @@ const TabPanel: React.FC<any> = ({ value, index, children }) => {
       hidden={value !== index}
       id={`simple-tabpanel-${index}`}
       aria-labelledby={`simple-tab-${index}`}
+      className="pt-10"
     >
       {value === index && <Box p={2}>{children}</Box>}
     </div>

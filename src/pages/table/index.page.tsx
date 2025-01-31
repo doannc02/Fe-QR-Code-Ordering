@@ -1,6 +1,6 @@
 import { BasicLayout } from '@/components/layouts/WrapLayout/BasicLayout'
 import { Meta } from '@/components/meta'
-import TableList from '@/components/templates/Table/TableList'
+import TableList from '@/components/templates/Customer/Table/TableList'
 import { HttpResponse } from '@/lib/api'
 import { combineGssp } from '@/lib/next/gssp/combineGssp'
 import { checkLogin } from '@/lib/next/gssp/middleware/checkLogin'
@@ -13,7 +13,7 @@ const Page: NextPageWithLayout<Props> = () => <TableList />
 
 Page.getLayout = BasicLayout
 Page.getMeta = Meta(() => ({
-  title: 'Danh sách bàn',
+  title: 'Danh sách bàn đã tạo',
   headNode: (
     <>
       <meta name='keywords' content='quản lý bàn' />

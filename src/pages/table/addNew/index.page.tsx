@@ -1,7 +1,6 @@
 import { BasicLayout } from '@/components/layouts/WrapLayout/BasicLayout'
 import { Meta } from '@/components/meta'
-import AdminOrder from '@/components/templates/AdminManager'
-import SaveTable from '@/components/templates/Table/SaveTable'
+import SaveTable from '@/components/templates/Customer/Table/SaveTable'
 import { HttpResponse } from '@/lib/api'
 import { combineGssp } from '@/lib/next/gssp/combineGssp'
 import { checkLogin } from '@/lib/next/gssp/middleware/checkLogin'

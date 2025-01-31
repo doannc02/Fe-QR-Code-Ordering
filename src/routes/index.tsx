@@ -31,7 +31,10 @@ export const TRANSLATE = {
 export const MENU_URL = {
   CONFIG: '/config',
   ORDER_ADMIN: '/orderAdmin',
-  TABLE: '/table',
+  TABLE: {
+    LIST: '/table',
+    MANAGE_STATE: '/table/manage',
+  },
 }
 
 export const listMenuForAdminRoutes: MenuPathProps[] = [
@@ -48,8 +51,18 @@ export const listMenuForAdminRoutes: MenuPathProps[] = [
 
   {
     name: 'Quản Lý Bàn',
-    path: MENU_URL.TABLE,
+    path: 'tb',
     icon: <Table />,
+    children: [
+      {
+        name: 'Danh Sách Bàn',
+        path: MENU_URL.TABLE.LIST,
+      },
+      {
+        name: 'Danh Sách Trạng Thái Bàn',
+        path: MENU_URL.TABLE.MANAGE_STATE,
+      },
+    ],
   },
 ]
 

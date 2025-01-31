@@ -1,31 +1,26 @@
 import { BasicLayout } from '@/components/layouts/WrapLayout/BasicLayout'
 import { Meta } from '@/components/meta'
+import ManageTableStates from '@/components/templates/Customer/Table/ManageState'
 import { HttpResponse } from '@/lib/api'
 import { combineGssp } from '@/lib/next/gssp/combineGssp'
+import { checkLogin } from '@/lib/next/gssp/middleware/checkLogin'
 import { NextPageWithLayout } from '@/lib/next/types'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
-import dynamic from 'next/dynamic'
 
-type Props = HttpResponse<any>
+type Props = HttpResponse<null>
 
-// Import Dashboard with dynamic to disable SSR
-const DashboardUser = dynamic(
-  () => import('@/components/templates/Customer/Dashboard'),
-  {
-    ssr: false, // Disable SSR for Dashboard component
-  }
-)
-
-const Page: NextPageWithLayout<Props> = () => <DashboardUser />
+const Page: NextPageWithLayout<Props> = () => <ManageTableStates />
 
 Page.getLayout = BasicLayout
-Page.getMeta = Meta(() => ({ title: 'Order food' }))
+Page.getMeta = Meta(() => ({
+  title: 'Quản lý trạng thái bàn',
+}))
 
 export const getServerSideProps = combineGssp<any>(
-  // authGssp(),
+  checkLogin(),
   async ({ locale = 'vn' }) => ({
     props: {
-      ...(await serverSideTranslations(locale, ['common'])),
+      ...(await serverSideTranslations(locale, ['common', 'login'])),
     },
   })
 )
