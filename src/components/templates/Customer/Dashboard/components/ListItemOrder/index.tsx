@@ -1,10 +1,13 @@
 import { useInView } from 'react-intersection-observer'
 import { OrderItem } from './orderItem'
 import { OrderItemOrderLoading } from './orderItemLoading'
-import { Chip, Grid } from '@mui/material'
+import { Box, Chip, Grid, Typography } from '@mui/material'
 import styles from '@/components/templates/Customer/Dashboard/components/ListItemOrder/item.module.css'
 import { useState } from 'react'
 import AcUnitIcon from '@mui/icons-material/AcUnit'
+import { motion } from 'framer-motion'
+import Image from 'next/image'
+import { Fastfood } from '@mui/icons-material'
 
 const OrderItemWithAnimation = ({ item }: { item: any }) => {
   const { ref, inView } = useInView({
@@ -77,15 +80,48 @@ export const ListItemOrder = ({
         />
       </Grid>
 
-      {isLoading
-        ? ['m', 'a', 'p'].map((i) => (
-            <Grid key={i} item xs={12} sm={4} md={4} lg={4}>
-              <OrderItemOrderLoading />
-            </Grid>
-          ))
-        : items.map((item) => (
-            <OrderItemWithAnimation key={item.id} item={item} />
-          ))}
+      {isLoading ? (
+        ['m', 'a', 'p'].map((i) => (
+          <Grid key={i} item xs={12} sm={4} md={4} lg={4}>
+            <OrderItemOrderLoading />
+          </Grid>
+        ))
+      ) : items.length === 0 ? (
+        <Grid item xs={12}>
+          <NoProductsFound />
+        </Grid>
+      ) : (
+        items.map((item) => (
+          <OrderItemWithAnimation key={item.id} item={item} />
+        ))
+      )}
     </Grid>
+  )
+}
+
+const NoProductsFound = () => {
+  return (
+    <Box
+      display='flex'
+      flexDirection='column'
+      alignItems='center'
+      justifyContent='center'
+      height='50vh'
+      textAlign='center'
+      sx={{
+        background: 'linear-gradient(135deg, #f5f7fa, #c3cfe2)',
+        borderRadius: '16px',
+        boxShadow: '0 4px 20px rgba(0, 0, 0, 0.1)',
+        padding: '32px',
+      }}
+    >
+      <Fastfood style={{ fontSize: 100 }} />
+      <Typography variant='h6' color='textSecondary' mt={2}>
+        Hiện tại không có món ăn nào trong danh mục này.
+      </Typography>
+      <Typography variant='body2' color='textSecondary' mt={1}>
+        Vui lòng thử lại với danh mục khác hoặc quay lại sau.
+      </Typography>
+    </Box>
   )
 }

@@ -1,6 +1,6 @@
 import DefaultImageApp from '@/assets/png/customer.png'
 import SquaresFour from '@/components/icons/SquaresFour'
-import { BLACK, ORANGE } from '@/helper/colors'
+import { BLACK, ORANGE, WHITE } from '@/helper/colors'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack'
 import { Menu, Typography } from '@mui/material'
 import Image from 'next/image'
@@ -25,7 +25,7 @@ export const SwitchSystem = () => {
   const [anchorEl, setAnchorEl] = React.useState<any>(null)
 
   return (
-    <div className='h-full w-1/3 relative '>
+    <div className='h-full w-full relative '>
       <div
         className='relative h-full flex items-center gap-10 cursor-pointer'
         onClick={(e) => setAnchorEl(e.currentTarget)}
@@ -36,15 +36,15 @@ export const SwitchSystem = () => {
             width={60}
             height={60}
             alt='logo-dev-job'
-            src={require('@/assets/jpg/logo-dev-job.jpg')}
+            src={require('static/images.ico')}
           />
 
           <Typography
             variant='body2'
             className='font-bold'
-            style={{ color: ORANGE }}
+            style={{ color: WHITE }}
           >
-            Nhà hàng DevQueLua
+            Ăn là sẽ nhớ - nhớ rồi sẽ tới ăn
           </Typography>
 
           <div
