@@ -1,18 +1,21 @@
-import React, { useState, useEffect } from 'react'
-import { Box, Typography, Link, IconButton } from '@mui/material'
-import { Facebook, Instagram, Twitter, YouTube } from '@mui/icons-material'
+import {
+  ArrowUpward,
+  Facebook,
+  Instagram,
+  Twitter,
+  YouTube,
+} from '@mui/icons-material'
+import { Box, IconButton, Link, Typography } from '@mui/material'
+import { useEffect, useState } from 'react'
 
 const Footer = () => {
   const [showBackToTop, setShowBackToTop] = useState(false)
 
   // Hàm kiểm tra vị trí cuộn và hiển thị nút "Trở về đầu trang"
   const handleScroll = () => {
-    if (window.scrollY > 0) {
-      // Hiển thị nút khi cuộn xuống quá 300px
-      setShowBackToTop(true)
-    } else {
-      setShowBackToTop(false)
-    }
+    // Kiểm tra vị trí cuộn và điều chỉnh theo yêu cầu
+
+    setShowBackToTop(true)
   }
 
   // Cuộn trang về đầu khi nút được nhấn
@@ -25,6 +28,7 @@ const Footer = () => {
 
   // Lắng nghe sự kiện cuộn
   useEffect(() => {
+    // Thêm sự kiện scroll
     window.addEventListener('scroll', handleScroll)
 
     // Cleanup khi component unmount
@@ -34,103 +38,134 @@ const Footer = () => {
   }, [])
 
   return (
-    <Box component='footer' className='bg-gray-800 text-white py-6'>
+    <Box
+      component='footer'
+      sx={{
+        background: 'linear-gradient(135deg, #1e3a8a, #1e40af)',
+        color: 'white',
+        py: 6,
+        position: 'relative',
+      }}
+    >
       {/* Container */}
-      <Box className='container mx-auto px-4'>
+      <Box sx={{ maxWidth: '1200px', mx: 'auto', px: 4 }}>
         {/* Footer nội dung */}
-        <Box className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8'>
+        <Box
+          sx={{
+            display: 'grid',
+            gridTemplateColumns: {
+              xs: '1fr',
+              sm: 'repeat(2, 1fr)',
+              md: 'repeat(4, 1fr)',
+            },
+            gap: 4,
+            mb: 4,
+          }}
+        >
           {/* Section 1: Liên kết */}
           <Box>
-            <Typography variant='h6' className='text-xl font-bold mb-4'>
+            <Typography
+              variant='h6'
+              sx={{ fontSize: '1.25rem', fontWeight: 'bold', mb: 2 }}
+            >
               Liên kết
             </Typography>
-            <ul className='space-y-2'>
-              <li>
-                <Link href='#' className='text-white hover:text-gray-400'>
-                  Trang chủ
-                </Link>
-              </li>
-              <li>
-                <Link href='#' className='text-white hover:text-gray-400'>
-                  Giới thiệu
-                </Link>
-              </li>
-              <li>
-                <Link href='#' className='text-white hover:text-gray-400'>
-                  Dịch vụ
-                </Link>
-              </li>
-              <li>
-                <Link href='#' className='text-white hover:text-gray-400'>
-                  Liên hệ
-                </Link>
-              </li>
-            </ul>
+            <Box component='ul' sx={{ listStyle: 'none', p: 0, m: 0 }}>
+              {['Trang chủ', 'Giới thiệu', 'Dịch vụ', 'Liên hệ'].map(
+                (link, index) => (
+                  <Box component='li' key={index} sx={{ mb: 1 }}>
+                    <Link
+                      href='#'
+                      sx={{
+                        color: 'white',
+                        textDecoration: 'none',
+                        '&:hover': {
+                          color: '#93c5fd',
+                          transition: 'color 0.3s',
+                        },
+                      }}
+                    >
+                      {link}
+                    </Link>
+                  </Box>
+                )
+              )}
+            </Box>
           </Box>
 
           {/* Section 2: Thông tin liên hệ */}
           <Box>
-            <Typography variant='h6' className='text-xl font-bold mb-4'>
+            <Typography
+              variant='h6'
+              sx={{ fontSize: '1.25rem', fontWeight: 'bold', mb: 2 }}
+            >
               Thông tin liên hệ
             </Typography>
-            <ul className='space-y-2'>
-              <li className='text-white'>Địa chỉ: 1234 Đường XYZ, Hà Nội</li>
-              <li className='text-white'>Email: support@example.com</li>
-              <li className='text-white'>SĐT: +84 123 456 789</li>
-            </ul>
+            <Box component='ul' sx={{ listStyle: 'none', p: 0, m: 0 }}>
+              <Box component='li' sx={{ mb: 1 }}>
+                Địa chỉ: 1234 Đường XYZ, Hà Nội
+              </Box>
+              <Box component='li' sx={{ mb: 1 }}>
+                Email: support@example.com
+              </Box>
+              <Box component='li' sx={{ mb: 1 }}>
+                SĐT: +84 123 456 789
+              </Box>
+            </Box>
           </Box>
 
           {/* Section 3: Mạng xã hội */}
           <Box>
-            <Typography variant='h6' className='text-xl font-bold mb-4'>
+            <Typography
+              variant='h6'
+              sx={{ fontSize: '1.25rem', fontWeight: 'bold', mb: 2 }}
+            >
               Mạng xã hội
             </Typography>
-            <Box className='flex space-x-4'>
-              <IconButton
-                href='https://facebook.com'
-                target='_blank'
-                color='inherit'
-              >
-                <Facebook />
-              </IconButton>
-              <IconButton
-                href='https://instagram.com'
-                target='_blank'
-                color='inherit'
-              >
-                <Instagram />
-              </IconButton>
-              <IconButton
-                href='https://twitter.com'
-                target='_blank'
-                color='inherit'
-              >
-                <Twitter />
-              </IconButton>
-              <IconButton
-                href='https://youtube.com'
-                target='_blank'
-                color='inherit'
-              >
-                <YouTube />
-              </IconButton>
+            <Box sx={{ display: 'flex', gap: 2 }}>
+              {[
+                { icon: <Facebook />, link: 'https://facebook.com' },
+                { icon: <Instagram />, link: 'https://instagram.com' },
+                { icon: <Twitter />, link: 'https://twitter.com' },
+                { icon: <YouTube />, link: 'https://youtube.com' },
+              ].map((social, index) => (
+                <IconButton
+                  key={index}
+                  href={social.link}
+                  target='_blank'
+                  sx={{
+                    color: 'white',
+                    '&:hover': { backgroundColor: 'rgba(255, 255, 255, 0.1)' },
+                  }}
+                >
+                  {social.icon}
+                </IconButton>
+              ))}
             </Box>
           </Box>
 
           {/* Section 4: Bản quyền */}
-          <Box className='col-span-1 sm:col-span-2 md:col-span-1'>
-            <Typography variant='h6' className='text-xl font-bold mb-4'>
+          <Box>
+            <Typography
+              variant='h6'
+              sx={{ fontSize: '1.25rem', fontWeight: 'bold', mb: 2 }}
+            >
               Bản quyền
             </Typography>
-            <Typography variant='body2' className='text-white'>
+            <Typography variant='body2'>
               © 2025 Công ty ABC. Tất cả các quyền được bảo vệ.
             </Typography>
           </Box>
         </Box>
 
         {/* Dòng phân cách */}
-        <Box className='mt-6 border-t border-gray-600 pt-4'>
-          <Typography variant='body2' className='text-center text-white'>
+        <Box
+          sx={{ mt: 4, pt: 4, borderTop: '1px solid rgba(255, 255, 255, 0.1)' }}
+        >
+          <Typography
+            variant='body2'
+            sx={{ textAlign: 'center', color: 'white' }}
+          >
             Được phát triển bởi Công ty ABC
           </Typography>
         </Box>
@@ -140,9 +175,20 @@ const Footer = () => {
       {showBackToTop && (
         <IconButton
           onClick={scrollToTop}
-          className='fixed bottom-6 right-6 bg-blue-600 text-white p-3 rounded-full shadow-lg hover:bg-blue-700'
+          sx={{
+            position: 'fixed',
+            bottom: 24,
+            right: 24,
+            backgroundColor: '#3b82f6',
+            color: 'white',
+            '&:hover': { backgroundColor: '#2563eb' },
+            boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+            transition: 'background-color 0.3s, transform 0.3s',
+            '&:active': { transform: 'scale(0.95)' },
+            zIndex: 1000, // Đảm bảo nút hiển thị trên các phần tử khác
+          }}
         >
-          ↑
+          <ArrowUpward />
         </IconButton>
       )}
     </Box>
