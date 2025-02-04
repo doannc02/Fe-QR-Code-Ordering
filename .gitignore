@@ -5,5 +5,4 @@
 # production
 /Dockerfile
 
-/.env
-/.env/
+
