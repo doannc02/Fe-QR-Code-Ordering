@@ -1,10 +1,9 @@
-import React, { useState, useEffect, useMemo } from 'react'
-import { Grid, Box, Tabs, Tab, Typography } from '@mui/material'
+import LoadingPage from '@/components/atoms/LoadingPage'
+import { Box, Grid, Tab, Tabs, Typography } from '@mui/material'
+import React, { useEffect, useMemo, useState } from 'react'
 import { ListItemOrder } from '../ListItemOrder'
 import BannerMedia from './banner'
 import useBanner from './useBanner'
-import { OrderItemOrderLoading } from '../ListItemOrder/orderItemLoading'
-import LoadingPage from '@/components/atoms/LoadingPage'
 
 const TabPanel: React.FC<any> = ({ value, index, children }) => {
   return (

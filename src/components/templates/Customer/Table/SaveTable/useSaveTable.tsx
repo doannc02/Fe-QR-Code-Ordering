@@ -136,7 +136,7 @@ const useSaveTable = () => {
     if (data?.data && isUpdate) {
       reset({ data: data?.data as unknown as Table[] })
     }
-  }, [id, data?.data, reset])
+  }, [id, data?.data, reset, isUpdate])
 
   return [
     {

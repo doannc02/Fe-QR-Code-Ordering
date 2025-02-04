@@ -6,21 +6,24 @@ import { ParamFoodItem, TypeFoodItem } from './type'
 
 const URL_FOOD_ITEM = '/api/v1/foodItem'
 
-export const getListFoodItems = async (params: ParamFoodItem): Promise<
-  PageResponse<TypeFoodItem[]>
-> => {
+export const getListFoodItems = async (
+  params: ParamFoodItem
+): Promise<PageResponse<TypeFoodItem[]>> => {
   const { data } = await commonApi({
     method: 'get',
     url: URL_FOOD_ITEM + '/list',
-    params: params
+    params: params,
   })
 
   return data
 }
 
-export const useQueryGetListFoodItems = (params: ParamFoodItem, options?: any) => {
+export const useQueryGetListFoodItems = (
+  params: ParamFoodItem,
+  options?: any
+) => {
   return useQuery<PageResponse<TypeFoodItem[]>>(
-    ['api/v1/foodItem/list'],
+    ['api/v1/foodItem/list' + params.categoryId],
     () => getListFoodItems(params),
     { ...defaultOption, ...options }
   )

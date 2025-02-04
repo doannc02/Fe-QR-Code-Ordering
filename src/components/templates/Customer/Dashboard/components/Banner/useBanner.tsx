@@ -6,8 +6,11 @@ import _ from 'lodash'
 import { useEffect, useState } from 'react'
 
 const useBanner = () => {
-  const { data: dataCategory, isLoading: isLoadingCategory } =
-    useQueryGetListCategories()
+  const {
+    data: dataCategory,
+    isLoading: isLoadingCategory,
+    isFetching: isFetchingCategory,
+  } = useQueryGetListCategories()
 
   const [categoryId, setCategoryId] = useState<any>(null)
 
@@ -17,15 +20,12 @@ const useBanner = () => {
     },
   })
 
-  const { handleSubmit, setValue, getValues } = methodForm
+  const { handleSubmit, setValue } = methodForm
 
   const onChangeTab = (categoryId: any) => {
     setValue('categoryId', categoryId)
     setCategoryId(categoryId)
-    onSubmit()
   }
-
-  console.log(categoryId, 'categoryId')
 
   useEffect(() => {
     if ((dataCategory?.data ?? []).length > 0) {
@@ -38,22 +38,17 @@ const useBanner = () => {
     data: dataFoodItems,
     isLoading: isLoadingFoodItems,
     isFetching,
-    refetch,
   } = useQueryGetListFoodItems(
     {
       categoryId: categoryId,
     },
     {
       enabled: !!categoryId,
+      staleTime: 1000 * 60 * 5, 
+      cacheTime: 1000 * 60 * 10, 
+      keepPreviousData: true, 
     }
   )
-
-  useEffect(() => {
-    if (categoryId) {
-      refetch()
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [categoryId])
 
   const onSubmit = handleSubmit(async (input) => {
     setCategoryId(input.categoryId)
@@ -63,7 +58,7 @@ const useBanner = () => {
     {
       dataCategory: dataCategory?.data ?? [],
       dataFoodItems: dataFoodItems?.data ?? [],
-      isLoadingCategory,
+      isLoadingCategory: isLoadingCategory || isFetchingCategory,
       isLoadingFoodItems,
       isFetching,
       categoryId,
