@@ -1,6 +1,7 @@
 import LoadingPage from '@/components/atoms/LoadingPage'
-import { Box, Grid, Tab, Tabs, Typography } from '@mui/material'
-import React, { useEffect, useMemo, useState } from 'react'
+import { Box, Grid, Tab, Tabs, Typography, useMediaQuery } from '@mui/material'
+import React, { useEffect, useMemo, useRef, useState } from 'react'
+import SwipeableViews from 'react-swipeable-views'
 import { ListItemOrder } from '../ListItemOrder'
 import BannerMedia from './banner'
 import useBanner from './useBanner'
@@ -37,17 +38,38 @@ const HomePage: React.FC = () => {
     isFetching,
     categoryId,
   } = values
-  const { onChangeTab, onSubmit, setCategoryId } = handles
+  const { onChangeTab, setCategoryId } = handles
 
-  const categoryIdMapping = useMemo(() => {
-    return dataCategory.map((tab) => tab.id)
-  }, [dataCategory])
+  const categoryIdMapping = useMemo(
+    () => dataCategory.map((tab) => tab.id),
+    [dataCategory]
+  )
 
-  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
+  //  mảng ref các HTMLElement
+  const tabRefs = useRef<(HTMLElement | null)[]>([])
+
+  const handleChangeTab = (event: React.SyntheticEvent, newValue: number) => {
+    setValue(newValue)
     const selectedCategoryId = categoryIdMapping[newValue]
-    onChangeTab(selectedCategoryId) // Cập nhật categoryId khi chuyển tab
-    setValue(newValue) // Cập nhật chỉ số tab hiện tại
+    onChangeTab(selectedCategoryId)
   }
+
+  const handleChangeIndex = (index: number) => {
+    setValue(index)
+    const selectedCategoryId = categoryIdMapping[index]
+    onChangeTab(selectedCategoryId)
+  }
+
+  // Khi tab thay đổi, tự động cuộn tab active vào giữa
+  useEffect(() => {
+    if (tabRefs.current[value]) {
+      tabRefs.current[value]?.scrollIntoView({
+        behavior: 'smooth',
+        block: 'nearest',
+        inline: 'center',
+      })
+    }
+  }, [value])
 
   useEffect(() => {
     if (dataCategory?.length > 0) {
@@ -55,20 +77,16 @@ const HomePage: React.FC = () => {
     }
   }, [dataCategory])
 
+  const isMobile = useMediaQuery('(max-width:600px)')
+
   return (
-    <Grid
-      container
-      paddingTop={{
-        xs: '0',
-        md: '10px',
-      }}
-    >
+    <Grid container paddingTop={{ xs: '0', md: '10px' }}>
       {isLoadingCategory ? (
         <div className='pt-20'>
           <LoadingPage />
         </div>
       ) : (
-        <Grid item xs={12} sm={12}>
+        <Grid item xs={12}>
           <div className='flex w-full justify-center items-center'>
             <div className='rounded-sm w-full'>
               <Box
@@ -82,34 +100,33 @@ const HomePage: React.FC = () => {
                   zIndex: 10,
                   backgroundColor: 'white',
                   boxShadow: 1,
-                  paddingTop: {
-                    xs: '0px',
-                    md: '0px',
-                  },
                 }}
                 className='w-full'
               >
                 <Box
                   sx={{
-                    display: 'flex', // Để các tab hiển thị ngang
-                    overflowX: 'auto', // Cho phép cuộn ngang khi có nhiều tab
-                    paddingBottom: '10px', // Khoảng cách dưới cho các tab
+                    display: 'flex',
+                    overflowX: 'auto',
+                    paddingBottom: '10px',
                   }}
                 >
                   <Tabs
                     value={value}
-                    onChange={handleChange}
+                    onChange={handleChangeTab}
                     aria-label='dynamic tabs example'
+                    variant='scrollable'
+                    scrollButtons='auto'
                     sx={{
-                      flexShrink: 0, // Đảm bảo các tab không bị thu nhỏ
-                      '& .MuiTabs-scroller': {
-                        overflowX: 'auto', // Thêm cuộn ngang vào Tab scroller
-                      },
+                      flexShrink: 0,
+                      '& .MuiTabs-scroller': { overflowX: 'auto' },
                     }}
                   >
                     {dataCategory.map((tab, index) => (
                       <Tab
                         key={tab.id}
+                        ref={(el) => {
+                          tabRefs.current[index] = el
+                        }}
                         label={
                           <Typography
                             sx={{
@@ -121,32 +138,49 @@ const HomePage: React.FC = () => {
                             {tab.name}
                           </Typography>
                         }
-                        {...a11yProps(index)} // a11yProps uses index
+                        {...a11yProps(index)}
                       />
                     ))}
                   </Tabs>
                 </Box>
               </Box>
-              <Box
-                sx={{
-                  paddingTop: {
-                    xs: '10px', // Padding top cho mobile
-                    md: '10px', // Không padding cho desktop
-                  },
-                }}
-              >
+              <Box sx={{ paddingTop: { xs: '10px', md: '10px' } }}>
                 <BannerMedia />
 
-                <TabPanel value={value} index={value}>
-                  <ListItemOrder
-                    isLoading={
-                      isFetching || isLoadingFoodItems || isLoadingCategory
-                    }
-                    items={dataFoodItems.filter(
-                      (item) => item.categoryId === categoryId
-                    )}
-                  />
-                </TabPanel>
+                {isMobile ? (
+                  <SwipeableViews
+                    index={value}
+                    onChangeIndex={handleChangeIndex}
+                  >
+                    {dataCategory.map((tab, index) => (
+                      <TabPanel key={tab.id} value={value} index={index}>
+                        <ListItemOrder
+                          isLoading={
+                            isFetching ||
+                            isLoadingFoodItems ||
+                            isLoadingCategory
+                          }
+                          items={dataFoodItems.filter(
+                            (item) => item.categoryId === tab.id
+                          )}
+                        />
+                      </TabPanel>
+                    ))}
+                  </SwipeableViews>
+                ) : (
+                  dataCategory.map((tab, index) => (
+                    <TabPanel key={tab.id} value={value} index={index}>
+                      <ListItemOrder
+                        isLoading={
+                          isFetching || isLoadingFoodItems || isLoadingCategory
+                        }
+                        items={dataFoodItems.filter(
+                          (item) => item.categoryId === tab.id
+                        )}
+                      />
+                    </TabPanel>
+                  ))
+                )}
               </Box>
             </div>
           </div>
