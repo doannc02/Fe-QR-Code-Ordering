@@ -1,33 +1,29 @@
-import React, { useEffect, useState } from 'react'
 import { useNotification } from '@/context/NotificationContext'
+import { ORANGE } from '@/helper/colors'
 import { useAppSelector } from '@/redux/hook'
+import SearchIcon from '@mui/icons-material/Search'
 import {
-  IconButton,
   Badge,
-  Drawer,
-  List,
-  ListItem,
-  ListItemText,
   Dialog,
   DialogActions,
   DialogContent,
   DialogTitle,
+  Drawer,
+  IconButton,
+  List,
+  ListItem,
+  ListItemText,
   Typography,
 } from '@mui/material'
 import { Menu } from 'lucide-react'
-import SearchIcon from '@mui/icons-material/Search'
-import NotificationsIcon from '@mui/icons-material/Notifications'
-import CustomizedBadges from './Badgecustom'
-import { AvatarCustom } from './AvatarCustom'
-import { SwitchSystem } from './SwitchSystem'
 import Image from 'next/image'
-import { ORANGE, WHITE } from '@/helper/colors'
+import { useEffect, useState } from 'react'
+import { AvatarCustom } from './AvatarCustom'
+import CustomizedBadges from './Badgecustom'
+import { SwitchSystem } from './SwitchSystem'
 
 export const Header = () => {
   const { notifications } = useNotification()
-  const { firstMainColor: GREEN_VIU } = useAppSelector(
-    (state) => state.themeColorData
-  )
 
   useEffect(() => {
     console.log('Notifications updated:', notifications)
@@ -80,14 +76,7 @@ export const Header = () => {
           <div
             className={`relative ${hasNewNotifications ? 'animate-shake' : ''}`}
             onClick={handleNotificationClick}
-          >
-            <NotificationsIcon />
-            {hasNewNotifications && (
-              <span className='absolute bottom-0 left-1/2 transform -translate-x-1/2 text-xs text-yellow-500 animate-pulse'>
-                New
-              </span>
-            )}
-          </div>
+          ></div>
         </Badge>
         <AvatarCustom
           email={user.email ?? ''}
@@ -117,14 +106,7 @@ export const Header = () => {
                 hasNewNotifications ? 'animate-shake' : ''
               }`}
               onClick={handleNotificationClick}
-            >
-              <NotificationsIcon />
-              {hasNewNotifications && (
-                <span className='absolute bottom-0 left-1/2 transform -translate-x-1/2 text-xs text-yellow-500 animate-pulse'>
-                  New
-                </span>
-              )}
-            </div>
+            ></div>
           </Badge>
           <CustomizedBadges />
         </div>

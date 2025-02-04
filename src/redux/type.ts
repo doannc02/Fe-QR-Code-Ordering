@@ -92,7 +92,7 @@ export type CurrentLogin = {
   fullname?: string | ''
   email?: string | null
   avatar?: string
-  tableId: number
+  tableId: number | null
 }
 
 export type OrderStore = {

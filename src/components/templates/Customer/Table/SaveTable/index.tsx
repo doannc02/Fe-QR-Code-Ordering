@@ -39,7 +39,7 @@ const SaveTable = () => {
             breadcrumbs={[
               {
                 title: 'Danh sách bàn',
-                pathname: MENU_URL.TABLE,
+                pathname: MENU_URL.TABLE.LIST,
               },
               {
                 title: isUpdate ? 'Chỉnh sửa ' : 'Thêm mới bàn',

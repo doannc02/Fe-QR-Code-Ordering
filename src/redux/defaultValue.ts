@@ -120,6 +120,7 @@ const userLoginDefault: CurrentLogin = {
   email: '',
   fullname: '',
   avatar: '',
+  tableId: null,
 }
 
 const listOrderDefault: ListOrder = []
