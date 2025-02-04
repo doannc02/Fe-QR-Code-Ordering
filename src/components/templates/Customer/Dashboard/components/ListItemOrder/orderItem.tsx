@@ -65,7 +65,7 @@ export const OrderItem = (props: {
 
       <form
         onSubmit={onSubmit}
-        className='bg-white rounded-md border-2 border-black flex flex-wrap p-4 w-full'
+        className='bg-white rounded-md border-2 border-black flex lg:flex-wrap p-4 w-full'
       >
         <div className='w-[32%] h-[110px] lg:h-full lg:w-full rounded-md overflow-hidden'>
           <Image
@@ -123,19 +123,15 @@ export const OrderItem = (props: {
             {notes || 'Dynamic text here'}
           </p>
           <div className='flex items-center justify-between mt-4'>
-            <div className='flex gap-4 w-full justify-between'>
-              <div className='flex-1'>
-                <QuantitySelector
-                  initialQuantity={0}
-                  control={control}
-                  name='quantity'
-                />
-              </div>
-              <div className='flex-shrink-0'>
-                <CoreButton theme='submit' type='submit'>
-                  Đặt
-                </CoreButton>
-              </div>
+            <div className='flex w-full justify-between'>
+              <QuantitySelector
+                initialQuantity={0}
+                control={control}
+                name='quantity'
+              />
+              <CoreButton theme='submit' type='submit'>
+                Đặt
+              </CoreButton>
             </div>
           </div>
         </div>

@@ -34,11 +34,6 @@ const QuantitySelector = ({
   variant = 'outlined',
   onChangeValue,
 }: QuantitySelectorProps) => {
-
-  useEffect(() => {
-    // Đồng bộ hóa giá trị khi initialQuantity thay đổi (nếu cần)
-  }, [initialQuantity])
-
   return (
     <div>
       <Controller
@@ -46,29 +41,30 @@ const QuantitySelector = ({
         name={name}
         rules={rules}
         render={({ field: { value, onChange }, fieldState: { error } }) => (
-          <Box display="flex" alignItems="center" justifyContent="center">
+          <Box display='flex' alignItems='center' justifyContent='center'>
             <IconButton
               onClick={() => {
                 if (value > minQuantity) {
-                  onChange(value - 1)  // Cập nhật giá trị bằng onChange của react-hook-form
+                  onChange(value - 1)
                   if (onChangeValue) {
                     onChangeValue(value - 1)
                   }
                 }
               }}
-              color="primary"
+              color='primary'
               disabled={value <= minQuantity || disabled || readOnly}
             >
               <Remove />
             </IconButton>
 
             <TextField
+              className='text-center w-2'
               value={value}
               onChange={(e) => {
                 const newValue = parseInt(e.target.value, 10)
                 if (!isNaN(newValue)) {
                   if (newValue >= minQuantity && newValue <= maxQuantity) {
-                    onChange(newValue)  // Cập nhật giá trị bằng onChange của react-hook-form
+                    onChange(newValue) // Cập nhật giá trị bằng onChange của react-hook-form
                     if (onChangeValue) {
                       onChangeValue(newValue)
                     }
@@ -81,8 +77,8 @@ const QuantitySelector = ({
                 type: 'number',
               }}
               variant={variant}
-              size="small"
-              sx={{ width: 60, textAlign: 'center', margin: '0 10px' }}
+              size='small'
+              sx={{ width: 45, textAlign: 'center', margin: '0 4px' }}
               disabled={disabled || readOnly}
               required={required}
               helperText={error && isHasMessageError && error.message}
@@ -92,13 +88,13 @@ const QuantitySelector = ({
             <IconButton
               onClick={() => {
                 if (value < maxQuantity) {
-                  onChange(value + 1)  // Cập nhật giá trị bằng onChange của react-hook-form
+                  onChange(value + 1)
                   if (onChangeValue) {
                     onChangeValue(value + 1)
                   }
                 }
               }}
-              color="primary"
+              color='primary'
               disabled={value >= maxQuantity || disabled || readOnly}
             >
               <Add />
