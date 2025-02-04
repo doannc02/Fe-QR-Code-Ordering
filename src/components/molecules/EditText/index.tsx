@@ -1,12 +1,14 @@
 import { RED } from '@/helper/colors'
-import { errorMsg } from '@/helper/message'
 import { Typography } from '@mui/material'
-import dynamic from 'next/dynamic'
-import 'react-quill/dist/quill.snow.css'
-import { useCallback, useRef } from 'react'
 import debounce from 'lodash/debounce'
+import dynamic from 'next/dynamic'
+import { useCallback, useRef } from 'react'
+import 'react-quill/dist/quill.snow.css'
 
-const ReactQuill = dynamic(() => import('react-quill'), { ssr: false })
+const ReactQuill = dynamic(() => import('react-quill'), {
+  ssr: false,
+  loading: () => <p>Loading editor...</p>,
+})
 
 type EditTextProps = {
   editorText: string
