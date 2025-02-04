@@ -81,8 +81,8 @@ export const ListItemOrder = ({
       </Grid>
 
       {isLoading ? (
-        ['m', 'a', 'p'].map((i) => (
-          <Grid key={i} item xs={12} sm={4} md={4} lg={4}>
+        ['m', 'a', 'p', 's'].map((i, index) => (
+          <Grid key={index} item xs={12} sm={4} md={3} lg={3}>
             <OrderItemOrderLoading />
           </Grid>
         ))
