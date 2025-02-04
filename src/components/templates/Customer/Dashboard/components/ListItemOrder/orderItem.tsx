@@ -15,11 +15,11 @@ import { Ribbon, RibbonContainer } from 'react-ribbons'
 export const OrderItem = (props: {
   foodItemId: number
   name: string
-  notes?: string
+  description?: string
   price: number
   imageUrl: string
 }) => {
-  const { foodItemId, name, notes, price, imageUrl } = props
+  const { foodItemId, name, description, price, imageUrl } = props
 
   const imageURL =
     imageUrl.includes('http') || imageUrl.includes('data')
@@ -28,7 +28,7 @@ export const OrderItem = (props: {
   const defaultValues = {
     foodItemId: foodItemId,
     name: name,
-    notes: notes || '',
+    description: description || '',
     price: price,
     quantity: 1,
     imageUrl: imageURL,
@@ -70,7 +70,7 @@ export const OrderItem = (props: {
         <div className='w-[32%] h-[110px] lg:h-full lg:w-full rounded-md overflow-hidden'>
           <Image
             src={imageURL}
-            alt='Order Image'
+            alt={name}
             width={150}
             height={150}
             objectFit='cover'
@@ -120,7 +120,7 @@ export const OrderItem = (props: {
               WebkitLineClamp: 2,
             }}
           >
-            {notes || 'Dynamic text here'}
+            {description || 'Dynamic text here'}
           </p>
           <div className='flex items-center justify-between mt-4'>
             <div className='flex w-full justify-between'>

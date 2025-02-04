@@ -106,7 +106,7 @@ export type OrderStore = {
   imageUrl: string
   orderItemId?: number
   foodItemId: number
-  notes: string
+  description: string
 }
 
 export type ListOrder = OrderStore[]

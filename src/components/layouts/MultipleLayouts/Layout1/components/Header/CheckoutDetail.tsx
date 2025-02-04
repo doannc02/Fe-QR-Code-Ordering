@@ -76,7 +76,7 @@ export const CheckoutDetail = () => {
           </Box>
           <CoreInput
             control={control}
-            name={`orderItems.${index}.notes`}
+            name={`orderItems.${index}.description`}
             label={`Ghi chú cho món ${item.name}`}
             multiline
           />
