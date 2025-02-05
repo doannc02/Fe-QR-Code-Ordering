@@ -44,7 +44,7 @@ export const OrderItem = (props: {
     if (input) {
       console.log(input, 'ip')
       dispatch(setListOrder(input))
-      successMsg(`x${input.quantity} - ${input.name} vào đơn thành công!`)
+      successMsg(`X${input.quantity} - ${input.name} vào đơn thành công!`)
       reset(defaultValues)
     }
   })

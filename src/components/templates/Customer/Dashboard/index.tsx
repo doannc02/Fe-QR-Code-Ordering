@@ -6,21 +6,15 @@ import {
   DialogActions,
   DialogContent,
   DialogTitle,
-  Skeleton,
 } from '@mui/material'
-import getConfig from 'next/config'
 import HomePage from './components/Banner'
 import { useDashboard } from './useDashboard'
-
-const {
-  publicRuntimeConfig: { COMMON_URL },
-} = getConfig()
 
 const Dashboard = () => {
   const [values, handles] = useDashboard()
 
   const { isLoading, methodForm, openDialog } = values
-  const { handleClose, onSubmit, setOpenDialog } = handles
+  const { handleClose, onSubmit } = handles
 
   const { control } = methodForm
 

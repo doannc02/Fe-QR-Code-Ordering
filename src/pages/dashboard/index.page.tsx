@@ -12,7 +12,7 @@ type Props = HttpResponse<any>
 const DashboardUser = dynamic(
   () => import('@/components/templates/Customer/Dashboard'),
   {
-    ssr: false,
+    ssr: true,
     loading: () => <DashboardSkeleton />,
   }
 )

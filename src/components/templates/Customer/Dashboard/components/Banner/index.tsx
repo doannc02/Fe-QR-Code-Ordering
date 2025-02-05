@@ -149,7 +149,7 @@ const HomePage: React.FC = () => {
                   </Tabs>
                 </Box>
               </Box>
-              <Box sx={{ paddingTop: { xs: '10px', md: '10px' } }}>
+              <Box sx={{ paddingTop: { xs: '0px', md: '10px' } }}>
                 <Suspense fallback={<BannerSkeleton />}>
                   <BannerMedia />
                 </Suspense>
@@ -161,7 +161,7 @@ const HomePage: React.FC = () => {
                   >
                     {dataCategory.map((tab, index) => (
                       <TabPanel key={tab.id} value={value} index={index}>
-                        <Suspense fallback={<LoadingPage />}>
+                        <Suspense fallback={<OrderItemOrderLoading />}>
                           <ListItemOrder
                             isLoading={
                               isFetching ||

@@ -1,39 +1,9 @@
-import styles from '@/components/templates/Customer/Dashboard/components/ListItemOrder/item.module.css'
-import { Fastfood } from '@mui/icons-material'
-import AcUnitIcon from '@mui/icons-material/AcUnit'
-import { Box, Chip, Grid, Typography } from '@mui/material'
-import { useState } from 'react'
-import { useInView } from 'react-intersection-observer'
-import { OrderItem } from './orderItem'
 import { OrderItemOrderLoading } from '@/components/templates/Customer/Dashboard/components/Loadings/listFoodItemSkeleton'
-
-const OrderItemWithAnimation = ({ item }: { item: any }) => {
-  const { ref, inView } = useInView({
-    triggerOnce: false,
-    threshold: 0.2,
-  })
-
-  return (
-    <Grid
-      item
-      xs={12}
-      sm={4}
-      md={3}
-      lg={3}
-      key={item.id}
-      ref={ref}
-      className={`${styles.fadeIn} ${inView ? styles.fadeInInView : ''}`}
-    >
-      <OrderItem
-        foodItemId={item.id}
-        imageUrl={item.imageUrl}
-        name={item?.name}
-        price={item.price}
-        description={item.description}
-      />
-    </Grid>
-  )
-}
+import AcUnitIcon from '@mui/icons-material/AcUnit'
+import { Chip, Grid } from '@mui/material'
+import { useState } from 'react'
+import NoProductsFound from './Components/notFoundItems'
+import OrderItemWithAnimation from './Components/orderItemWithAnimation'
 
 const ListItemOrder = ({
   items,
@@ -95,30 +65,3 @@ const ListItemOrder = ({
 }
 
 export default ListItemOrder
-
-const NoProductsFound = () => {
-  return (
-    <Box
-      display='flex'
-      flexDirection='column'
-      alignItems='center'
-      justifyContent='center'
-      height='50vh'
-      textAlign='center'
-      sx={{
-        background: 'linear-gradient(135deg, #f5f7fa, #c3cfe2)',
-        borderRadius: '16px',
-        boxShadow: '0 4px 20px rgba(0, 0, 0, 0.1)',
-        padding: '32px',
-      }}
-    >
-      <Fastfood style={{ fontSize: 100 }} />
-      <Typography variant='h6' color='textSecondary' mt={2}>
-        Hiện tại không có món ăn nào trong danh mục này.
-      </Typography>
-      <Typography variant='body2' color='textSecondary' mt={1}>
-        Vui lòng thử lại với danh mục khác hoặc quay lại sau.
-      </Typography>
-    </Box>
-  )
-}

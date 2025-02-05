@@ -12,7 +12,7 @@ type Props = HttpResponse<any>
 const DashboardUser = dynamic(
   () => import('@/components/templates/Customer/Dashboard'),
   {
-    ssr: false, // Disable SSR for Dashboard component
+    ssr: true,
   }
 )
 

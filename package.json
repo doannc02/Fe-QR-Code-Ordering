@@ -36,6 +36,7 @@
     "date-fns": "^2.29.3",
     "dayjs": "^1.11.7",
     "dotenv": "^16.4.5",
+    "embla-carousel-react": "^8.5.2",
     "framer-motion": "^11.3.30",
     "html2canvas": "^1.4.1",
     "i18next": "^22.4.14",
@@ -72,6 +73,7 @@
     "react-number-format": "^5.2.2",
     "react-query": "^3.39.3",
     "react-redux": "^8.1.0",
+    "react-responsive-carousel": "^3.2.23",
     "react-ribbons": "^1.1.7",
     "react-slick": "^0.30.3",
     "react-smooth-collapse": "^2.1.2",
@@ -89,7 +91,6 @@
     "storybook-addon-next": "^1.6.9",
     "styled-components": "^5.3.10",
     "swiper": "^11.2.0",
-    "uuid": "^10.0.0",
     "webpack": "^5.77.0",
     "xlsx": "^0.18.5",
     "zod": "^3.22.4"

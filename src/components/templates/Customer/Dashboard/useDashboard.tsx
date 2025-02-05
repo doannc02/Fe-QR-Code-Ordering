@@ -7,7 +7,6 @@ import { HubConnectionBuilder } from '@microsoft/signalr'
 import getConfig from 'next/config'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
-import { toast } from 'react-toastify'
 const {
   publicRuntimeConfig: { COMMON_URL },
 } = getConfig()
