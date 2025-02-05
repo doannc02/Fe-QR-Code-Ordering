@@ -1,10 +1,17 @@
-import LoadingPage from '@/components/atoms/LoadingPage'
+import React, { Suspense, useEffect, useMemo, useRef, useState } from 'react'
 import { Box, Grid, Tab, Tabs, Typography, useMediaQuery } from '@mui/material'
-import React, { useEffect, useMemo, useRef, useState } from 'react'
 import SwipeableViews from 'react-swipeable-views'
-import { ListItemOrder } from '../ListItemOrder'
-import BannerMedia from './banner'
+import LoadingPage from '@/components/atoms/LoadingPage'
 import useBanner from './useBanner'
+import { BannerSkeleton } from '../Loadings/bannerSkeleton'
+import { OrderItemOrderLoading } from '../Loadings/listFoodItemSkeleton'
+
+// Lazy load components
+const ListItemOrder = React.lazy(
+  () =>
+    import('@/components/templates/Customer/Dashboard/components/ListItemOrder')
+)
+const BannerMedia = React.lazy(() => import('./banner'))
 
 const TabPanel: React.FC<any> = ({ value, index, children }) => {
   return (
@@ -45,7 +52,6 @@ const HomePage: React.FC = () => {
     [dataCategory]
   )
 
-  //  mảng ref các HTMLElement
   const tabRefs = useRef<(HTMLElement | null)[]>([])
 
   const handleChangeTab = (event: React.SyntheticEvent, newValue: number) => {
@@ -60,7 +66,6 @@ const HomePage: React.FC = () => {
     onChangeTab(selectedCategoryId)
   }
 
-  // Khi tab thay đổi, tự động cuộn tab active vào giữa
   useEffect(() => {
     if (tabRefs.current[value]) {
       tabRefs.current[value]?.scrollIntoView({
@@ -145,7 +150,9 @@ const HomePage: React.FC = () => {
                 </Box>
               </Box>
               <Box sx={{ paddingTop: { xs: '10px', md: '10px' } }}>
-                <BannerMedia />
+                <Suspense fallback={<BannerSkeleton />}>
+                  <BannerMedia />
+                </Suspense>
 
                 {isMobile ? (
                   <SwipeableViews
@@ -154,6 +161,25 @@ const HomePage: React.FC = () => {
                   >
                     {dataCategory.map((tab, index) => (
                       <TabPanel key={tab.id} value={value} index={index}>
+                        <Suspense fallback={<LoadingPage />}>
+                          <ListItemOrder
+                            isLoading={
+                              isFetching ||
+                              isLoadingFoodItems ||
+                              isLoadingCategory
+                            }
+                            items={dataFoodItems.filter(
+                              (item) => item.categoryId === tab.id
+                            )}
+                          />
+                        </Suspense>
+                      </TabPanel>
+                    ))}
+                  </SwipeableViews>
+                ) : (
+                  dataCategory.map((tab, index) => (
+                    <TabPanel key={tab.id} value={value} index={index}>
+                      <Suspense fallback={<OrderItemOrderLoading />}>
                         <ListItemOrder
                           isLoading={
                             isFetching ||
@@ -164,20 +190,7 @@ const HomePage: React.FC = () => {
                             (item) => item.categoryId === tab.id
                           )}
                         />
-                      </TabPanel>
-                    ))}
-                  </SwipeableViews>
-                ) : (
-                  dataCategory.map((tab, index) => (
-                    <TabPanel key={tab.id} value={value} index={index}>
-                      <ListItemOrder
-                        isLoading={
-                          isFetching || isLoadingFoodItems || isLoadingCategory
-                        }
-                        items={dataFoodItems.filter(
-                          (item) => item.categoryId === tab.id
-                        )}
-                      />
+                      </Suspense>
                     </TabPanel>
                   ))
                 )}

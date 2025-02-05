@@ -1,5 +1,6 @@
 import { BasicLayout } from '@/components/layouts/WrapLayout/BasicLayout'
 import { Meta } from '@/components/meta'
+import { DashboardSkeleton } from '@/components/templates/Customer/Dashboard/components/Loadings/dashboardSkeleton'
 import { HttpResponse } from '@/lib/api'
 import { combineGssp } from '@/lib/next/gssp/combineGssp'
 import { NextPageWithLayout } from '@/lib/next/types'
@@ -8,11 +9,11 @@ import dynamic from 'next/dynamic'
 
 type Props = HttpResponse<any>
 
-// Import Dashboard with dynamic to disable SSR
 const DashboardUser = dynamic(
   () => import('@/components/templates/Customer/Dashboard'),
   {
-    ssr: false, // Disable SSR for Dashboard component
+    ssr: false,
+    loading: () => <DashboardSkeleton />,
   }
 )
 
@@ -22,7 +23,6 @@ Page.getLayout = BasicLayout
 Page.getMeta = Meta(() => ({ title: 'Order food' }))
 
 export const getServerSideProps = combineGssp<any>(
-  // authGssp(),
   async ({ locale = 'vn' }) => ({
     props: {
       ...(await serverSideTranslations(locale, ['common'])),

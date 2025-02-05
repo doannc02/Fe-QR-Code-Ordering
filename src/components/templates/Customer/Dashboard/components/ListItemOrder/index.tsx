@@ -1,13 +1,11 @@
+import styles from '@/components/templates/Customer/Dashboard/components/ListItemOrder/item.module.css'
+import { Fastfood } from '@mui/icons-material'
+import AcUnitIcon from '@mui/icons-material/AcUnit'
+import { Box, Chip, Grid, Typography } from '@mui/material'
+import { useState } from 'react'
 import { useInView } from 'react-intersection-observer'
 import { OrderItem } from './orderItem'
-import { OrderItemOrderLoading } from './orderItemLoading'
-import { Box, Chip, Grid, Typography } from '@mui/material'
-import styles from '@/components/templates/Customer/Dashboard/components/ListItemOrder/item.module.css'
-import { useState } from 'react'
-import AcUnitIcon from '@mui/icons-material/AcUnit'
-import { motion } from 'framer-motion'
-import Image from 'next/image'
-import { Fastfood } from '@mui/icons-material'
+import { OrderItemOrderLoading } from '@/components/templates/Customer/Dashboard/components/Loadings/listFoodItemSkeleton'
 
 const OrderItemWithAnimation = ({ item }: { item: any }) => {
   const { ref, inView } = useInView({
@@ -31,12 +29,13 @@ const OrderItemWithAnimation = ({ item }: { item: any }) => {
         imageUrl={item.imageUrl}
         name={item?.name}
         price={item.price}
+        description={item.description}
       />
     </Grid>
   )
 }
 
-export const ListItemOrder = ({
+const ListItemOrder = ({
   items,
   isLoading,
 }: {
@@ -81,11 +80,7 @@ export const ListItemOrder = ({
       </Grid>
 
       {isLoading ? (
-        ['m', 'a', 'p', 's'].map((i, index) => (
-          <Grid key={index} item xs={12} sm={4} md={3} lg={3}>
-            <OrderItemOrderLoading />
-          </Grid>
-        ))
+        <OrderItemOrderLoading />
       ) : items.length === 0 ? (
         <Grid item xs={12}>
           <NoProductsFound />
@@ -98,6 +93,8 @@ export const ListItemOrder = ({
     </Grid>
   )
 }
+
+export default ListItemOrder
 
 const NoProductsFound = () => {
   return (

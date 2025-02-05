@@ -6,6 +6,7 @@ import {
   DialogActions,
   DialogContent,
   DialogTitle,
+  Skeleton,
 } from '@mui/material'
 import getConfig from 'next/config'
 import HomePage from './components/Banner'
