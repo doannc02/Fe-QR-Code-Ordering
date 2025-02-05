@@ -144,14 +144,22 @@ export default function CustomizedBadges() {
             open={openDrawer}
             onClose={toggleDrawer(false)}
             variant='temporary'
+            PaperProps={{
+              style: {
+                paddingBottom: '20px',
+                borderTopLeftRadius: '10px',
+                borderTopRightRadius: '10px',
+              },
+            }}
           >
             <div
               role='presentation'
               style={{
                 width: '100%',
-                padding: '20px',
+                padding: '15px 20px 10px 15px',
                 backgroundColor: '#fff',
-                boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.2)',
+                boxShadow: '0px 4px 5px rgba(0, 0, 0, 0.2)',
+                maxHeight: '76vh',
               }}
             >
               <Typography variant='h6' className='pb-5' gutterBottom>
@@ -185,21 +193,32 @@ export default function CustomizedBadges() {
                 <Typography variant='h6'>Tổng tiền</Typography>
                 <CurrencyFormatCustom amount={totalAmount} showCurrencyName />
               </Box>
-              <Typography>
+              <Typography className='pb-10'>
                 {convertCurrency(totalAmount, 'VND')}
-                {/* Đảm bảo giá trị là number */}
               </Typography>
-              <CoreButton
-                className='pt-20'
-                variant='contained'
-                color='primary'
-                onClick={() => {
-                  toggleDrawer(false)
-                  onSubmit()
-                }}
-              >
-                Xác nhận
-              </CoreButton>
+
+              <div className='flex justify-start space-x-10 pb-10'>
+                <CoreButton
+                  variant='contained'
+                  color='secondary'
+                  onClick={() => {
+                    setOpenDialog(false)
+                  }}
+                >
+                  Tiếp tục đặt món
+                </CoreButton>
+                <CoreButton
+                  className='py-20'
+                  variant='contained'
+                  color='primary'
+                  onClick={() => {
+                    toggleDrawer(false)
+                    onSubmit()
+                  }}
+                >
+                  Xác nhận
+                </CoreButton>
+              </div>
             </div>
           </Drawer>
         )}
