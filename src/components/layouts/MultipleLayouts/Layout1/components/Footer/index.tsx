@@ -41,10 +41,17 @@ const Footer = () => {
     <Box
       component='footer'
       sx={{
-        background: 'linear-gradient(135deg, #1e3a8a, #1e40af)',
-        color: 'white',
         py: 6,
         position: 'relative',
+      }}
+      style={{
+        zIndex: 100,
+        borderBottom: '1px solid rgba(0, 0, 0, 0.2)',
+        boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.2)',
+        background:
+          'linear-gradient(270deg, #1E3A8A, #1E40AF, #3B82F6, #60A5FA)',
+        backgroundSize: '400% 400%',
+        animation: 'gradientBackground 10s ease infinite',
       }}
     >
       {/* Container */}
@@ -153,7 +160,7 @@ const Footer = () => {
               Bản quyền
             </Typography>
             <Typography variant='body2'>
-              © 2025 Công ty ABC. Tất cả các quyền được bảo vệ.
+              © 2025 Doannc02. Tất cả các quyền được bảo vệ.
             </Typography>
           </Box>
         </Box>
@@ -166,7 +173,7 @@ const Footer = () => {
             variant='body2'
             sx={{ textAlign: 'center', color: 'white' }}
           >
-            Được phát triển bởi Công ty ABC
+            Được phát triển bởi DevQueLua
           </Typography>
         </Box>
       </Box>

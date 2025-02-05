@@ -20,7 +20,7 @@ const TabPanel: React.FC<any> = ({ value, index, children }) => {
       hidden={value !== index}
       id={`simple-tabpanel-${index}`}
       aria-labelledby={`simple-tab-${index}`}
-      className='pt-10'
+      className='pt-10 xs:pt-5'
     >
       {value === index && <Box p={2}>{children}</Box>}
     </div>
@@ -149,7 +149,7 @@ const HomePage: React.FC = () => {
                   </Tabs>
                 </Box>
               </Box>
-              <Box sx={{ paddingTop: { xs: '0px', md: '10px' } }}>
+              <Box sx={{ paddingTop: { xs: '10px', md: '10px' } }}>
                 <Suspense fallback={<BannerSkeleton />}>
                   <BannerMedia />
                 </Suspense>

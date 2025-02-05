@@ -67,7 +67,7 @@ export const OrderItem = (props: {
         onSubmit={onSubmit}
         className='bg-white rounded-md border-2 border-black flex lg:flex-wrap p-4 w-full'
       >
-        <div className='w-[32%] h-[110px] lg:h-full lg:w-full rounded-md overflow-hidden'>
+        <div className='w-[32%] h-[110px]  lg:w-full rounded-md overflow-hidden'>
           <Image
             src={imageURL}
             alt={name}
@@ -112,12 +112,12 @@ export const OrderItem = (props: {
             />
           </div>
           <p
-            className='text-[12px] font-thin mt-2 text-gray-700 lg:text-[16px]'
+            className='text-[12px] font-thin mt-2 text-gray-700 md:text-[14px] lg:text-[15px]'
             style={{
               display: '-webkit-box',
               WebkitBoxOrient: 'vertical',
               overflow: 'hidden',
-              WebkitLineClamp: 2,
+              WebkitLineClamp: 1,
             }}
           >
             {description || 'Dynamic text here'}
