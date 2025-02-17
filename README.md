@@ -1,4 +1,4 @@
-# Apus New base source NextJS + ReactJS - Rule & Coding conventions (NextJS + ReactJS)
+#base source NextJS + ReactJS - Rule & Coding conventions (NextJS + ReactJS)
 
 ## About NextJS
 
